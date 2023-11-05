@@ -46,3 +46,33 @@ const asyncFunctions = [
       console.error(error);
     });
   
+//3 
+// 비동기 작업 시뮬레이션을 위한 함수
+function simulateAsyncOperation(taskNumber) {
+    return new Promise((resolve, reject) => {
+      const randomDelay = Math.floor(Math.random() * 3000) + 1000; // 1초에서 4초 사이의 랜덤 지연 시간 생성
+      setTimeout(() => {
+        console.log(`Task ${taskNumber} 완료`);
+        resolve(taskNumber); // 작업 완료 시 현재 작업 번호를 반환
+      }, randomDelay);
+    });
+  }
+  
+  // 비동기 작업을 순차적으로 수행하고 결과 누적
+  const tasks = [1, 2, 3, 4, 5];
+  
+  const executeTasks = tasks.reduce(async (accumulator, task) => {
+    // 이전 작업의 결과를 가져와서 누적 결과를 계산
+    const previousResult = await accumulator;
+    
+    // 현재 작업을 수행하고 결과를 가져옴
+    const currentResult = await simulateAsyncOperation(task);
+    
+    // 현재 작업의 결과와 이전 작업의 결과를 더하고 반환
+    return previousResult + currentResult;
+  }, Promise.resolve(0)); // 초기값으로 Promise.resolve(0) 설정
+  
+  executeTasks.then((finalResult) => {
+    console.log(`모든 작업 완료. 최종 결과: ${finalResult}`);
+  });
+  
