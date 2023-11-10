@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <p>This is a test</p>
+  </body>
+  <script>
+    let pText = document.querySelector("p").textContent;
+    console.log(pText + ", " + pText.length);
+
+    let int = 8;
+    let newWord = "Hello ";
+
+    let newPText = pText.slice(0, int) + newWord + pText.slice(int);
+    console.log(newPText + ", " + newPText.length);
+  </script>
+</html>
